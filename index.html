@@ -13,6 +13,8 @@
   --white: #ffffff; --ink: #0d1f35; --ink-soft: #2d4a6a;
   --muted: #6b8aaa; --card: #f5faff; --border: #d4e8f7;
   --section-alt: #f0f7ff; --green: #16a34a; --green-bg: #f0fff4; --green-border: #a7f3c0;
+  --dark-section:#0d1f35;
+  --dark-card:#152a47;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -233,32 +235,81 @@ h2{font-size:clamp(1.5rem,3vw,2.4rem)}
 @media(max-width:900px){.hamburger{display:flex}.nav-sections{display:none}}
 @media(max-width:680px){body{font-size:14px}.stats-bar{flex-direction:column}.stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.1);padding:0.6rem 0}.stat-item:last-child{border-bottom:none}.cta-band{flex-direction:column;text-align:center;padding:2rem 1.5rem;margin:0 3% 3rem}.photo-row.three,.photo-row.four,.photo-row.five{grid-template-columns:1fr 1fr}.pimg.h260,.pimg.h300,.pimg.h340{height:160px}}
 @media(max-width:480px){.hero{padding:6rem 4% 2.5rem;min-height:auto}.hero-right{display:none}.section{padding:2.5rem 4%}.photo-row{padding:0 4% 2.5rem;grid-template-columns:1fr 1fr}.photo-row .pimg{height:140px!important}.features-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}}
+
+/* ── SINGLE LINE NAV ── */
+nav{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;gap:1rem;flex-wrap:nowrap}
+.nav-links{display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;flex:1;justify-content:center}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-link{padding:0 0.75rem;height:56px;display:flex;align-items:center;font-size:0.72rem;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;flex-shrink:0}
+.nav-link:hover,.nav-link.active{color:var(--blue);border-color:var(--blue)}
+.nav-cta{background:var(--accent);color:var(--ink);font-weight:700;font-size:0.75rem;padding:0.45rem 1rem;border-radius:50px;border:none;cursor:pointer;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 3px 10px rgba(240,165,0,0.25)}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(240,165,0,0.35)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;flex-shrink:0}
+.hamburger span{width:20px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.3s;display:block}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob-menu{display:none;position:fixed;inset:0;z-index:190;background:#fff;padding:4.5rem 6% 2rem;flex-direction:column;border-top:3px solid var(--blue)}
+.mob-menu.open{display:flex}
+.mob-menu a{padding:0.9rem 0;font-size:0.95rem;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border);transition:color 0.2s}
+.mob-menu a:hover{color:var(--blue)}
+.mob-cta-link{margin-top:1.2rem;background:var(--blue);color:#fff!important;text-align:center;border-radius:50px;border:none!important;padding:0.9rem!important}
+/* Scrollable photo strip */
+.photo-scroll-wrap{padding:2.5rem 0;overflow:hidden}
+.photo-scroll-label{padding:0 4%;margin-bottom:0.8rem;font-size:0.67rem;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem}
+.photo-scroll-label::after{content:'← swipe →';font-size:0.6rem;color:var(--sky-deep);font-style:italic;letter-spacing:0}
+.photo-scroll{display:flex;gap:0.8rem;overflow-x:auto;padding:0 4% 1rem;scrollbar-width:none;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.photo-scroll::-webkit-scrollbar{display:none}
+.ps-img{flex-shrink:0;width:240px;height:185px;border-radius:13px;overflow:hidden;position:relative;box-shadow:0 3px 14px rgba(13,31,53,0.09);scroll-snap-align:start;transition:transform 0.3s}
+.ps-img:hover{transform:scale(1.02)}
+.ps-img img{width:100%;height:100%;object-fit:cover;display:block}
+.ps-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(13,31,53,0.62));padding:0.9rem 0.7rem 0.55rem;font-size:0.68rem;color:rgba(255,255,255,0.92);font-style:italic}
+/* Photo icons for feature cards */
+.feature-icon-img{width:52px;height:52px;border-radius:12px;overflow:hidden;margin-bottom:1rem;flex-shrink:0}
+.feature-icon-img img{width:100%;height:100%;object-fit:cover;display:block}
+/* Dark section */
+.section.dark{background:var(--dark-section,#0d1f35);color:#fff}
+.section.dark .section-tag{color:var(--accent-light,#fdd87a)}
+.section.dark .section-tag::before{background:var(--accent-light,#fdd87a)}
+.section.dark h2{color:#fff}
+.section.dark h2 em{color:var(--accent-light,#fdd87a)}
+.section.dark .section-sub{color:rgba(255,255,255,0.52)}
+/* Testi dark cards */
+.testi-card-dark{background:#152a47;border:1px solid rgba(255,255,255,0.07);border-radius:13px;padding:1.2rem;transition:transform 0.3s}
+.testi-card-dark:hover{transform:translateY(-3px)}
+.testi-card-dark .testi-stars{color:var(--accent-light)}
+.testi-card-dark .testi-quote{color:rgba(255,255,255,0.7)}
+.testi-card-dark .testi-author{color:#fff}
+.testi-card-dark .testi-role{color:rgba(255,255,255,0.38);font-size:0.68rem}
+body{font-size:15px}
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex!important}.hero{grid-template-columns:1fr;padding-top:4.5rem}.hero-right{display:none}}
+@media(max-width:600px){body{font-size:14px}.stats-bar{flex-direction:column;padding:1rem 4%}.stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.09);padding:0.5rem 0}.stat-item:last-child{border-bottom:none}.cta-band{flex-direction:column;text-align:center;padding:2rem 1.5rem;margin:0 3% 3rem}.features-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.ps-img{width:190px;height:150px}.promise-block{margin:0 3%;padding:1.5rem;flex-direction:column}}
+@media(max-width:480px){.section{padding:2.5rem 4%}.hero{padding:4.5rem 4% 2rem;min-height:auto}.h1{font-size:1.6rem}.steps-list .step-row{flex-direction:column;gap:0.8rem}.results-grid{grid-template-columns:1fr 1fr}.ps-img{width:165px;height:135px}.photo-scroll-wrap{padding:2rem 0}}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="#" class="logo"><div class="logo-dot"></div>Mavericks Agency</a>
-  <a href="#apply" class="nav-btn">Book Free Call →</a>
-      <button class="hamburger" onclick="toggleMenu(this)" aria-label="Menu"><span></span><span></span><span></span></button>
-  <div class="nav-sections">
+  <div class="nav-links">
     <a href="#problem" class="nav-link">The Problem</a>
     <a href="#features" class="nav-link">What You Get</a>
     <a href="#start" class="nav-link">How to Start</a>
     <a href="#costs" class="nav-link">Costs</a>
-    <a href="#testi" class="nav-link">Results</a>
+    <a href="#testi2" class="nav-link">Results</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="#apply" class="nav-link">Book Call</a>
   </div>
+  <a href="#apply" class="nav-cta">Book Free Call →</a>
+  <button class="hamburger" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
+<div class="mob-menu" id="mobMenu">
   <a href="#problem" onclick="closeMenu()">The Problem</a>
   <a href="#features" onclick="closeMenu()">What You Get</a>
   <a href="#start" onclick="closeMenu()">How to Start</a>
   <a href="#costs" onclick="closeMenu()">Costs</a>
-  <a href="#testi" onclick="closeMenu()">Results</a>
+  <a href="#testi2" onclick="closeMenu()">Results</a>
   <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <a href="#apply" onclick="closeMenu()" class="mob-cta">Book My Free Call →</a>
+  <a href="#apply" onclick="closeMenu()" class="mob-cta-link">Book My Free Call →</a>
 </div>
 
 <!-- HERO -->
@@ -324,9 +375,20 @@ h2{font-size:clamp(1.5rem,3vw,2.4rem)}
     <div class="testi-mini"><div class="testi-mini-stars">★★★★★</div><div class="testi-mini-text">"Started during maternity leave with a full-time job. I never thought I could do this — but I did."</div><div class="testi-mini-name">Glenda Manalo</div><div class="testi-mini-role">Mom of 2 · Maternity leave start</div></div>
     <div class="testi-mini"><div class="testi-mini-stars">★★★★★</div><div class="testi-mini-text">"Whether you're looking for additional income or a fresh start, Team Mavericks can get you there."</div><div class="testi-mini-name">Sarah Walcien</div><div class="testi-mini-role">Full-time student · Now earning</div></div>
   </div>
+
+<!-- SCROLLABLE PHOTO STRIP 1 -->
+<div class="photo-scroll-wrap">
+  <div class="photo-scroll-label">Real people. Real results.</div>
+  <div class="photo-scroll">
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=600&q=85" alt="Success"/><div class="ps-caption">Real milestones. Real momentum.</div></div>
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=85" alt="Workshop"/><div class="ps-caption">Live events across Canada</div></div>
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=85" alt="Team"/><div class="ps-caption">Leaders who share everything</div></div>
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=85" alt="Meeting"/><div class="ps-caption">A system built to get you results</div></div>
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=85" alt="Remote work"/><div class="ps-caption">Work from anywhere, part-time</div></div>
+  </div>
 </div>
 
-<!-- PHOTO ROW 1 -->
+<!-- PHOTO ROW 1 (hidden, replaced) -->
 <div class="photo-row four">
   <div class="pimg h260"><img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=600&q=85" alt="Success celebration"/><div class="pimg-caption">Real milestones. Real momentum.</div></div>
   <div class="pimg h260"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=85" alt="Team workshop"/><div class="pimg-caption">Live events across Canada</div></div>
@@ -350,31 +412,37 @@ h2{font-size:clamp(1.5rem,3vw,2.4rem)}
   </div>
 </section>
 
-<!-- PHOTO ROW 2 -->
-<div class="photo-row three" style="padding-top:5rem;">
-  <div class="pimg h260"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85" alt="Professional woman"/><div class="pimg-caption">Any background. Any starting point.</div></div>
   <div class="pimg h340"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=85" alt="Team success"/><div class="pimg-caption">Community that celebrates your wins</div></div>
   <div class="pimg h260"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=700&q=85" alt="Professional man"/><div class="pimg-caption">Licensed professionals you can trust</div></div>
 </div>
 
 <!-- WHAT YOU GET -->
+
+<!-- SCROLLABLE PHOTO STRIP 2 -->
+<div class="photo-scroll-wrap" style="background:#f0f7ff;padding:2.5rem 0">
+  <div class="photo-scroll-label" style="padding:0 4%">How members live the opportunity</div>
+  <div class="photo-scroll">
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=85" alt="Community"/><div class="ps-caption">A community that pushes you forward</div></div>
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=600&q=85" alt="Professional"/><div class="ps-caption">Any background. Any starting point.</div></div>
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=85" alt="Team success"/><div class="ps-caption">Community that celebrates your wins</div></div>
+    <div class="ps-img"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=85" alt="Man"/><div class="ps-caption">Licensed professionals you can trust</div></div>
+  </div>
+</div>
+
 <section class="section" id="features">
   <div class="section-tag">Everything You Get</div>
   <h2>Your complete system to go from<br/><em>zero to income.</em></h2>
   <p class="section-sub">Most programs give you information. We give you the full system — plus the hands-on coaching to actually execute it.</p>
   <div class="features-grid">
-    <div class="feature-card reveal"><div class="feature-icon">🎓</div><div class="feature-title">Licensing Plan + Dedicated Coach</div><div class="feature-desc">Get licensed step-by-step with a dedicated coach guiding every move. Study plan, field training, and exam support — all included. Never guess what to do next.</div></div>
-    <div class="feature-card reveal"><div class="feature-icon">⚙️</div><div class="feature-title">Done-For-You Business System</div><div class="feature-desc">We set up your lead collection, automated follow-up, conversation scripts, and booking pipeline — so you can start creating appointments without cold calling.</div></div>
-    <div class="feature-card gold reveal"><div class="feature-icon">🗺️</div><div class="feature-title">90-Day Accelerator Roadmap</div><div class="feature-desc">A week-by-week plan with daily targets. Systems alone don't create income — consistent action does. We keep you on track every single week.</div></div>
-    <div class="feature-card reveal"><div class="feature-icon">🤖</div><div class="feature-title">Automation Tools</div><div class="feature-desc">Technology that handles the manual follow-ups, reminders, and pipeline management — so you can focus on conversations and actually helping clients.</div></div>
-    <div class="feature-card reveal"><div class="feature-icon">🏆</div><div class="feature-title">Community + Accountability</div><div class="feature-desc">Exclusive community of growing agents, weekly check-ins, live coaching, and a scoreboard so you always know where you stand and what's next.</div></div>
-    <div class="feature-card gold reveal"><div class="feature-icon">💼</div><div class="feature-title">Real Products. Real Regulation.</div><div class="feature-desc">Life insurance, investments, debt solutions — regulated financial products families need. You get paid by the carrier when a client chooses a solution.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon-img"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=200&q=80" alt=""/></div><div class="feature-title">Licensing Plan + Dedicated Coach</div><div class="feature-desc">Get licensed step-by-step with a dedicated coach guiding every move. Study plan, field training, and exam support — all included. Never guess what to do next.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon-img"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&q=80" alt=""/></div><div class="feature-title">Done-For-You Business System</div><div class="feature-desc">We set up your lead collection, automated follow-up, conversation scripts, and booking pipeline — so you can start creating appointments without cold calling.</div></div>
+    <div class="feature-card gold reveal"><div class="feature-icon-img"><img src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=200&q=80" alt=""/></div><div class="feature-title">90-Day Accelerator Roadmap</div><div class="feature-desc">A week-by-week plan with daily targets. Systems alone don't create income — consistent action does. We keep you on track every single week.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon-img"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=200&q=80" alt=""/></div><div class="feature-title">Automation Tools</div><div class="feature-desc">Technology that handles the manual follow-ups, reminders, and pipeline management — so you can focus on conversations and actually helping clients.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&q=80" alt=""/></div><div class="feature-title">Community + Accountability</div><div class="feature-desc">Exclusive community of growing agents, weekly check-ins, live coaching, and a scoreboard so you always know where you stand and what's next.</div></div>
+    <div class="feature-card gold reveal"><div class="feature-icon-img"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=200&q=80" alt=""/></div><div class="feature-title">Real Products. Real Regulation.</div><div class="feature-desc">Life insurance, investments, debt solutions — regulated financial products families need. You get paid by the carrier when a client chooses a solution.</div></div>
   </div>
 </section>
 
-<!-- PHOTO ROW 3 -->
-<div class="photo-row five" style="padding-top:0;">
-  <div class="pimg h200"><img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=500&q=85" alt="Workshop"/><div class="pimg-caption">Workshops & training</div></div>
   <div class="pimg h200"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=500&q=85" alt="Handshake"/><div class="pimg-caption">Trusted partnerships</div></div>
   <div class="pimg h200"><img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=700&q=85" alt="Family"/><div class="pimg-caption">Serving families that matter</div></div>
   <div class="pimg h200"><img src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=500&q=85" alt="Smiling"/><div class="pimg-caption">Your network grows with you</div></div>
@@ -435,21 +503,18 @@ h2{font-size:clamp(1.5rem,3vw,2.4rem)}
   </div>
 </section>
 
-<!-- PHOTO ROW 4 -->
-<div class="photo-row two" style="padding-top:0;">
-  <div class="pimg h300"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=85" alt="Team event"/><div class="pimg-caption">A community that pushes you to grow</div></div>
   <div class="pimg h300"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&q=85" alt="Workshop event"/><div class="pimg-caption">Live training events nationwide</div></div>
 </div>
 
 <!-- TESTIMONIALS FULL -->
-<section class="section alt" id="testi2">
+<section class="section dark" id="testi2">
   <div class="section-tag">Real Results</div>
   <h2>Everyday Canadians. <em>Same system.</em></h2>
   <p class="section-sub" style="font-size:0.8rem;font-style:italic;">Results vary and depend on effort, licensing, and individual circumstances. These are examples, not guarantees.</p>
   <div class="testi-grid">
-    <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><div class="testi-quote">"So proud and grateful to be part of the Mavericks family — surrounded by leadership that truly empowers with incredible coaching every step of the way."</div><div class="testi-author">Kat Gito</div><div class="testi-role">Working mom · Pro athlete · $30K in 3 months</div></div>
-    <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><div class="testi-quote">"The system and step-by-step structure are insane. It's completely changing the game for people with zero background — and anyone can start with zero risk."</div><div class="testi-author">Sarah Lagrosa</div><div class="testi-role">200K+ earner · Agency owner · RN</div></div>
-    <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><div class="testi-quote">"Whether you're looking for additional income or a fresh start, Team Mavericks can help you get there. Grateful I clicked that message button over a year ago."</div><div class="testi-author">Sarah Walcien</div><div class="testi-role">Started while studying full-time · Now earning consistently</div></div>
+    <div class="testi-card-dark reveal"><div class="testi-stars">★★★★★</div><div class="testi-quote">"So proud and grateful to be part of the Mavericks family — surrounded by leadership that truly empowers with incredible coaching every step of the way."</div><div class="testi-author">Kat Gito</div><div class="testi-role">Working mom · Pro athlete · $30K in 3 months</div></div>
+    <div class="testi-card-dark reveal"><div class="testi-stars">★★★★★</div><div class="testi-quote">"The system and step-by-step structure are insane. It's completely changing the game for people with zero background — and anyone can start with zero risk."</div><div class="testi-author">Sarah Lagrosa</div><div class="testi-role">200K+ earner · Agency owner · RN</div></div>
+    <div class="testi-card-dark reveal"><div class="testi-stars">★★★★★</div><div class="testi-quote">"Whether you're looking for additional income or a fresh start, Team Mavericks can help you get there. Grateful I clicked that message button over a year ago."</div><div class="testi-author">Sarah Walcien</div><div class="testi-role">Started while studying full-time · Now earning consistently</div></div>
   </div>
 </section>
 
@@ -497,18 +562,18 @@ h2{font-size:clamp(1.5rem,3vw,2.4rem)}
 </footer>
 
 <script>
-function toggleMenu(btn){btn.classList.toggle("open");document.getElementById("mobileMenu").classList.toggle("open");document.body.style.overflow=btn.classList.contains("open")?"hidden":""}
-function closeMenu(){document.querySelector(".hamburger").classList.remove("open");document.getElementById("mobileMenu").classList.remove("open");document.body.style.overflow=""}
+function toggleMenu(btn){btn.classList.toggle("open");document.getElementById("mobMenu").classList.toggle("open");document.body.style.overflow=btn.classList.contains("open")?"hidden":""}
+function closeMenu(){document.querySelector(".hamburger").classList.remove("open");document.getElementById("mobMenu").classList.remove("open");document.body.style.overflow=""}
 
 function toggleMenu(btn){
   btn.classList.toggle('open');
-  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('mobMenu').classList.toggle('open');
   document.body.style.overflow=btn.classList.contains('open')?'hidden':'';
 }
 function closeMenu(){
   const h=document.querySelector('.hamburger');
   if(h)h.classList.remove('open');
-  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('mobMenu').classList.remove('open');
   document.body.style.overflow='';
 }
 
